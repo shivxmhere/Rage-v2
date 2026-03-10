@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>RAGE OS — Rise. Achieve. Grow. Evolve.</title>
+  <meta name="description" content="The Student Operating System. Rise. Achieve. Grow. Evolve." />
+
+  <!-- PWA Meta Tags -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="RAGE OS">
+  <meta name="theme-color" content="#080810">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Syne:wght@400..800&display=swap"
+    rel="stylesheet">
+</head>
+
+<body>
+  <div id="root">
+    <!-- Branded Loading Splash -->
+    <div id="splash"
+      style="background: #080810; position: fixed; inset: 0; z-index: 10000; display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: 'Bebas Neue', sans-serif;">
+      <div style="font-size: 84px; color: #E85D04; letter-spacing: 4px; animation: pulse 2s infinite ease-in-out;">RAGE
+        OS</div>
+      <div
+        style="height: 2px; width: 120px; background: rgba(232, 93, 4, 0.2); margin-top: 24px; position: relative; overflow: hidden;">
+        <div
+          style="position: absolute; inset: 0; background: #E85D04; width: 40%; animation: loaderLine 1.5s infinite linear;">
+        </div>
+      </div>
+      <style>
+        @keyframes pulse {
+
+          0%,
+          100% {
+            opacity: 1;
+            transform: scale(1);
+          }
+
+          50% {
+            opacity: 0.7;
+            transform: scale(0.98);
+          }
+        }
+
+        @keyframes loaderLine {
+          0% {
+            transform: translateX(-150%);
+          }
+
+          100% {
+            transform: translateX(250%);
+          }
+        }
+      </style>
+    </div>
+  </div>
+  <script type="module" src="/src/main.tsx"></script>
+</body>
+
+</html>

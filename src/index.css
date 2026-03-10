@@ -1,0 +1,74 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: #080810;
+  --color-card: #0d0d1c;
+  --color-orange: #E85D04;
+  --color-text: #eeeef8;
+  --color-muted: #666677;
+  --color-green: #22c55e;
+  --color-red: #ef4444;
+  --color-border: rgba(255, 255, 255, 0.08);
+
+  --font-display: "Bebas Neue", sans-serif;
+  --font-body: "Syne", sans-serif;
+  --font-mono: "Space Mono", monospace;
+
+  --radius-default: 4px;
+}
+
+@layer base {
+  body {
+    @apply bg-background text-text font-body antialiased selection:bg-orange/30;
+    margin: 0;
+    overflow-x: hidden;
+  }
+
+  * {
+    @apply border-border;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-card/80 backdrop-blur-md border border-white/5;
+  }
+
+  .glow-orange {
+    text-shadow: 0 0 20px rgba(232, 93, 4, 0.5);
+  }
+
+  .box-glow-orange {
+    box-shadow: 0 0 40px rgba(232, 93, 4, 0.15);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
