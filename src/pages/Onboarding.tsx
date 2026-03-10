@@ -54,31 +54,32 @@ export default function Onboarding() {
         if (step === 4 && (!goal || !goalDetail)) { setErr('Operational objective required'); return }
 
         setStep(s => s + 1)
+        window.scrollTo({ top: 0, behavior: 'smooth' })
     }
-
     const handleLaunch = async () => {
         setLoading(true)
         try {
-            // Save initial habits/goals as individual items
             const now = Date.now()
-            await Promise.all([
+            // Parallel operations for speed
+            const savePromises = [
                 ...habits.map((h, i) => saveItem(currentUser.uid, 'habits', now + i, {
                     title: h,
-                    done: false,
-                    streak: 0,
+                    doneDate: null,
                     createdAt: new Date().toISOString()
                 })),
                 saveItem(currentUser.uid, 'goals', now + 100, {
                     title: goal,
                     detail: goalDetail,
-                    subject: subjects[0],
+                    subject: subjects[0] || 'General',
                     progress: 0,
                     target: 100,
                     unit: '%',
                     done: false,
                     createdAt: new Date().toISOString()
                 })
-            ])
+            ]
+
+            await Promise.all(savePromises)
 
             await completeOnboarding(currentUser.uid, {
                 username: username.toLowerCase().trim(),
@@ -93,11 +94,14 @@ export default function Onboarding() {
                 rageScore: 0,
                 streak: 0,
                 lastStudyDate: null,
+                onboardingComplete: true
             })
 
-            navigate("/app")
-        } catch (e) {
-            setErr('Synchronization failure. Try again.')
+            // Final punchy navigation
+            setTimeout(() => navigate("/app"), 500)
+        } catch (e: any) {
+            console.error(e)
+            setErr('Synchronization failure: ' + (e.message || 'Unknown protocol error'))
         } finally {
             setLoading(false)
         }
@@ -122,15 +126,15 @@ export default function Onboarding() {
                 <AnimatePresence mode="wait">
                     <motion.div
                         key={step}
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -10 }}
-                        transition={{ duration: 0.3 }}
+                        initial={{ opacity: 0, x: 20, rotateY: 10 }}
+                        animate={{ opacity: 1, x: 0, rotateY: 0 }}
+                        exit={{ opacity: 0, x: -20, rotateY: -10 }}
+                        transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
                     >
                         <Card className="p-8 md:p-10 border-white/10 shadow-2xl relative overflow-hidden">
                             {/* Subtle corner detail */}
                             <div className="absolute top-0 right-0 p-2 font-mono text-[8px] text-white/10 uppercase tracking-widest leading-none">
-                                Onboarding Protocol // Step 0{step}
+                                TECHLIONS PROTOCOL // Step 0{step}
                             </div>
 
                             {step === 1 && (
@@ -143,7 +147,7 @@ export default function Onboarding() {
                                         <Flame className="text-orange" size={40} />
                                     </motion.div>
                                     <div className="space-y-2">
-                                        <h2 className="font-display text-4xl uppercase tracking-wider text-orange leading-none">Initiating Sequence</h2>
+                                        <h2 className="font-display text-4xl uppercase tracking-wider text-orange leading-none">TECHLIONS ACTIVATION</h2>
                                         <p className="text-muted text-xs uppercase tracking-widest font-mono">Pilot: {(userProfile?.name || 'Unknown').split(' ')[0]}</p>
                                     </div>
                                     <div className="bg-white/5 px-6 py-6 border-l-2 border-orange relative">
@@ -271,11 +275,38 @@ export default function Onboarding() {
                                         <h2 className="font-display text-5xl uppercase tracking-widest text-green">All Systems GO</h2>
                                         <p className="text-xs text-muted font-mono uppercase tracking-[0.2em]">System ready for deployment</p>
                                     </div>
-                                    <div className="space-y-1.5 pt-4">
-                                        <Btn full size="lg" className="h-16 text-xl bg-green hover:bg-green/90" onClick={handleLaunch} disabled={loading}>
-                                            {loading ? 'DEPLOYING...' : 'LAUNCH RAGE OS'}
+                                    <div className="space-y-4 pt-4">
+                                        <Btn
+                                            full
+                                            size="lg"
+                                            className="h-20 text-2xl bg-green hover:bg-green/90 group relative overflow-hidden"
+                                            onClick={handleLaunch}
+                                            disabled={loading}
+                                        >
+                                            <AnimatePresence mode="wait">
+                                                {loading ? (
+                                                    <motion.div
+                                                        key="l"
+                                                        initial={{ opacity: 0 }}
+                                                        animate={{ opacity: 1 }}
+                                                        className="flex items-center gap-3"
+                                                    >
+                                                        <div className="w-5 h-5 border-2 border-black/20 border-t-black animate-spin rounded-full" />
+                                                        UPLINKING DATA...
+                                                    </motion.div>
+                                                ) : (
+                                                    <motion.div
+                                                        key="n"
+                                                        initial={{ opacity: 0 }}
+                                                        animate={{ opacity: 1 }}
+                                                        className="flex items-center gap-3"
+                                                    >
+                                                        LAUNCH TECHLIONS OS <Rocket className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                                                    </motion.div>
+                                                )}
+                                            </AnimatePresence>
                                         </Btn>
-                                        <p className="text-[8px] font-mono text-muted/30 uppercase tracking-[0.4em]">Secure Handshake Protocols Active</p>
+                                        <p className="text-[10px] font-mono text-muted/30 uppercase tracking-[0.6em] animate-pulse">Quantum Encryption Protocols Active</p>
                                     </div>
                                 </div>
                             )}
@@ -285,7 +316,7 @@ export default function Onboarding() {
             </div>
 
             {/* Branded watermark */}
-            <div className="absolute bottom-6 font-display text-4xl text-white/5 pointer-events-none uppercase tracking-widest">Antigravity Edition</div>
+            <div className="absolute bottom-6 font-display text-4xl text-white/5 pointer-events-none uppercase tracking-widest">TECHLIONS</div>
         </div>
     )
 }

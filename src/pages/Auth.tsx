@@ -101,7 +101,7 @@ export default function Auth() {
 
                 {/* Tactical status lines at bottom */}
                 <div className="absolute bottom-8 left-12 right-12 flex justify-between font-mono text-[8px] text-white/10 uppercase tracking-[0.3em]">
-                    <span>System v2.0.4 // Antigravity</span>
+                    <span>System v2.0.4 // TECHLIONS CORE</span>
                     <span>Status: Awaiting Pilot</span>
                 </div>
             </div>
