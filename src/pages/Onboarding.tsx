@@ -18,7 +18,7 @@ import { Btn, Input, Card, AddRow, Tag, Textarea } from '../components/UI'
 const STEPS = ['Initiation', 'Identity', 'Tactical Subjects', 'Primary Directive', 'SOPs', 'Deployment']
 
 export default function Onboarding() {
-    const { currentUser, userProfile, completeOnboarding, saveItem, quote, checkUsername } = useAuth()
+    const { currentUser, userProfile, completeOnboarding, saveItem, quote, checkUsername, logout } = useAuth()
     const navigate = useNavigate()
 
     const [step, setStep] = useState(1)
@@ -46,9 +46,24 @@ export default function Onboarding() {
                 setErr('Username must be 3-15 chars, lowercase, numbers, or underscores.'); return
             }
             setLoading(true)
-            const isAvail = await checkUsername(username)
-            setLoading(false)
-            if (!isAvail) { setErr('Identification Conflict: Username taken'); return }
+            try {
+                // Race the username check against a 5s timeout so we never get permanently stuck
+                const timeoutPromise = new Promise<boolean>((_, reject) =>
+                    setTimeout(() => reject(new Error('Network timeout')), 5000)
+                )
+                const isAvail = await Promise.race([checkUsername(username), timeoutPromise])
+                if (!isAvail) { setErr('Identification Conflict: Username taken'); setLoading(false); return }
+            } catch (e: any) {
+                // On timeout or any error, still allow proceeding (username uniqueness checked again at launch)
+                if (e.message === 'Network timeout') {
+                    // Timeout: treat as potentially available, warn the user
+                    console.warn('Username check timed out — proceeding anyway')
+                } else {
+                    setErr('Network issue: ' + (e.message || 'Try again')); setLoading(false); return
+                }
+            } finally {
+                setLoading(false)
+            }
         }
         if (step === 3 && subjects.length === 0) { setErr('Add at least one tactical subject'); return }
         if (step === 4 && (!goal || !goalDetail)) { setErr('Operational objective required'); return }
