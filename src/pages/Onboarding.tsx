@@ -148,7 +148,11 @@ export default function Onboarding() {
                                     </motion.div>
                                     <div className="space-y-2">
                                         <h2 className="font-display text-4xl uppercase tracking-wider text-orange leading-none">TECHLIONS ACTIVATION</h2>
-                                        <p className="text-muted text-xs uppercase tracking-widest font-mono">Pilot: {(userProfile?.name || 'Unknown').split(' ')[0]}</p>
+                                        <div className="flex items-center justify-center gap-2">
+                                            <p className="text-muted text-[10px] uppercase tracking-widest font-mono">Pilot: {(userProfile?.name || 'Unknown').split(' ')[0]}</p>
+                                            <span className="text-white/10">•</span>
+                                            <button onClick={() => logout(navigate)} className="text-[10px] uppercase tracking-widest font-mono text-orange/40 hover:text-orange transition-colors">Abort & Switch Account</button>
+                                        </div>
                                     </div>
                                     <div className="bg-white/5 px-6 py-6 border-l-2 border-orange relative">
                                         <span className="absolute -top-3 left-4 bg-background px-2 text-[8px] font-mono text-orange/50 uppercase tracking-[0.2em]">Intercepted Wisdom</span>

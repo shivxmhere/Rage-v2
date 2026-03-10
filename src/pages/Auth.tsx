@@ -16,7 +16,7 @@ import { useAuth } from '../context/AuthContext'
 import { Btn, Input, Card } from '../components/UI'
 
 export default function Auth() {
-    const { currentUser, signup, login, loginWithGoogle, quote } = useAuth()
+    const { currentUser, userProfile, logout, signup, login, loginWithGoogle, quote } = useAuth()
     const navigate = useNavigate()
 
     const [tab, setTab] = useState<'signin' | 'signup'>('signin')
@@ -30,7 +30,11 @@ export default function Auth() {
     const [name, setName] = useState('')
     const [confirmPass, setConfirmPass] = useState('')
 
-    if (currentUser) return <Navigate to="/app" replace />
+    // Auth Guard: Only redirect if fully onboarded
+    if (currentUser) {
+        if (userProfile?.onboardingComplete) return <Navigate to="/app" replace />
+        return <Navigate to="/onboarding" replace />
+    }
 
     const handleSignIn = async (e?: React.FormEvent) => {
         e?.preventDefault()
