@@ -113,107 +113,151 @@ export default function Auth() {
             {/* RIGHT: Auth Portal */}
             <div className="w-full md:w-[480px] flex flex-col justify-center p-8 md:p-16 relative bg-card/20">
                 <div className="max-w-sm mx-auto w-full space-y-8">
-                    <div className="space-y-2">
-                        <h2 className="font-display text-4xl uppercase tracking-wider">{tab === 'signin' ? 'AUTHORIZED ENTRY' : 'NEW PROTOCOL'}</h2>
-                        <p className="text-muted text-[10px] uppercase font-mono tracking-widest">Awaiting Credentials...</p>
-                    </div>
-
-                    <div className="flex gap-1 bg-white/5 p-1">
-                        <button
-                            onClick={() => setTab('signin')}
-                            className={`flex-1 py-3 text-[10px] font-bold uppercase tracking-widest transition-all ${tab === 'signin' ? 'bg-orange text-black' : 'text-muted hover:text-text'}`}
-                        >
-                            Sign In
-                        </button>
-                        <button
-                            onClick={() => setTab('signup')}
-                            className={`flex-1 py-3 text-[10px] font-bold uppercase tracking-widest transition-all ${tab === 'signup' ? 'bg-orange text-black' : 'text-muted hover:text-text'}`}
-                        >
-                            Request Access
-                        </button>
-                    </div>
-
                     <AnimatePresence mode="wait">
-                        <motion.form
-                            key={tab}
-                            initial={{ opacity: 0, x: 20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            exit={{ opacity: 0, x: -20 }}
-                            onSubmit={tab === 'signin' ? handleSignIn : handleSignUp}
-                            className="space-y-4"
-                        >
-                            {tab === 'signup' && (
+                        {currentUser ? (
+                            <motion.div
+                                initial={{ opacity: 0, y: 10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                className="space-y-6"
+                            >
+                                <div className="p-6 bg-orange/5 border border-orange/20 space-y-4">
+                                    <div className="flex items-center gap-3">
+                                        <div className="w-10 h-10 bg-orange/20 flex items-center justify-center font-display text-lg text-orange border border-orange/40 rounded-xl">
+                                            {currentUser.email?.[0].toUpperCase()}
+                                        </div>
+                                        <div className="flex flex-col">
+                                            <span className="text-[10px] font-bold uppercase tracking-widest text-muted">Session Active</span>
+                                            <span className="text-sm font-bold text-text truncate max-w-[200px]">{currentUser.email}</span>
+                                        </div>
+                                    </div>
+                                    <div className="flex flex-col gap-2">
+                                        <Btn full size="lg" className="h-14" onClick={() => navigate('/onboarding')}>
+                                            Continue Activation <ArrowRight size={18} className="ml-2" />
+                                        </Btn>
+                                        <button
+                                            onClick={() => logout(navigate)}
+                                            className="text-[10px] font-mono uppercase tracking-widest text-orange/40 hover:text-orange transition-colors py-2"
+                                        >
+                                            Switch Sector [Sign Out]
+                                        </button>
+                                    </div>
+                                </div>
+                            </motion.div>
+                        ) : (
+                            <div className="space-y-2">
+                                <h2 className="font-display text-4xl uppercase tracking-wider">{tab === 'signin' ? 'AUTHORIZED ENTRY' : 'NEW PROTOCOL'}</h2>
+                                <p className="text-muted text-[10px] uppercase font-mono tracking-widest">Awaiting Credentials...</p>
+                            </div>
+                        )}
+                    </AnimatePresence>
+
+                    {!currentUser && (
+                        <div className="flex gap-1 bg-white/5 p-1">
+                            <button
+                                onClick={() => setTab('signin')}
+                                className={`flex-1 py-3 text-[10px] font-bold uppercase tracking-widest transition-all ${tab === 'signin' ? 'bg-orange text-black' : 'text-muted hover:text-text'}`}
+                            >
+                                Sign In
+                            </button>
+                            <button
+                                onClick={() => setTab('signup')}
+                                className={`flex-1 py-3 text-[10px] font-bold uppercase tracking-widest transition-all ${tab === 'signup' ? 'bg-orange text-black' : 'text-muted hover:text-text'}`}
+                            >
+                                Request Access
+                            </button>
+                        </div>
+                    )}
+
+                    {!currentUser ? (
+                        <AnimatePresence mode="wait">
+                            <motion.form
+                                key={tab}
+                                initial={{ opacity: 0, x: 20 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                exit={{ opacity: 0, x: -20 }}
+                                onSubmit={tab === 'signin' ? handleSignIn : handleSignUp}
+                                className="space-y-4"
+                            >
+                                {tab === 'signup' && (
+                                    <div className="space-y-1.5">
+                                        <label className="text-[10px] font-bold text-muted uppercase tracking-widest flex items-center gap-2"><User size={10} /> Pilot Designation</label>
+                                        <input
+                                            required
+                                            placeholder="Full Name"
+                                            className="w-full bg-white/5 border border-white/10 px-4 py-3 text-sm focus:border-orange/50 outline-none transition-all placeholder:text-muted/30"
+                                            value={name}
+                                            onChange={e => setName(e.target.value)}
+                                        />
+                                    </div>
+                                )}
+
                                 <div className="space-y-1.5">
-                                    <label className="text-[10px] font-bold text-muted uppercase tracking-widest flex items-center gap-2"><User size={10} /> Pilot Designation</label>
+                                    <label className="text-[10px] font-bold text-muted uppercase tracking-widest flex items-center gap-2"><AtSign size={10} /> Communication Link</label>
                                     <input
                                         required
-                                        placeholder="Full Name"
+                                        type="email"
+                                        placeholder="email@rage.os"
                                         className="w-full bg-white/5 border border-white/10 px-4 py-3 text-sm focus:border-orange/50 outline-none transition-all placeholder:text-muted/30"
-                                        value={name}
-                                        onChange={e => setName(e.target.value)}
+                                        value={email}
+                                        onChange={e => setEmail(e.target.value)}
                                     />
                                 </div>
-                            )}
 
-                            <div className="space-y-1.5">
-                                <label className="text-[10px] font-bold text-muted uppercase tracking-widest flex items-center gap-2"><AtSign size={10} /> Communication Link</label>
-                                <input
-                                    required
-                                    type="email"
-                                    placeholder="email@rage.os"
-                                    className="w-full bg-white/5 border border-white/10 px-4 py-3 text-sm focus:border-orange/50 outline-none transition-all placeholder:text-muted/30"
-                                    value={email}
-                                    onChange={e => setEmail(e.target.value)}
-                                />
-                            </div>
-
-                            <div className="space-y-1.5">
-                                <label className="text-[10px] font-bold text-muted uppercase tracking-widest flex items-center gap-2"><Key size={10} /> Encryption Key</label>
-                                <input
-                                    required
-                                    type="password"
-                                    placeholder="••••••••"
-                                    className="w-full bg-white/5 border border-white/10 px-4 py-3 text-sm focus:border-orange/50 outline-none transition-all placeholder:text-muted/30"
-                                    value={password}
-                                    onChange={e => setPassword(e.target.value)}
-                                />
-                            </div>
-
-                            {tab === 'signup' && (
                                 <div className="space-y-1.5">
-                                    <label className="text-[10px] font-bold text-muted uppercase tracking-widest flex items-center gap-2"><ShieldCheck size={10} /> Confirm Encryption</label>
+                                    <label className="text-[10px] font-bold text-muted uppercase tracking-widest flex items-center gap-2"><Key size={10} /> Encryption Key</label>
                                     <input
                                         required
                                         type="password"
                                         placeholder="••••••••"
                                         className="w-full bg-white/5 border border-white/10 px-4 py-3 text-sm focus:border-orange/50 outline-none transition-all placeholder:text-muted/30"
-                                        value={confirmPass}
-                                        onChange={e => setConfirmPass(e.target.value)}
+                                        value={password}
+                                        onChange={e => setPassword(e.target.value)}
                                     />
                                 </div>
-                            )}
 
-                            {err && (
-                                <motion.div
-                                    initial={{ opacity: 0 }}
-                                    animate={{ opacity: 1 }}
-                                    className="flex items-center gap-3 p-3 bg-red/10 border border-red/20 text-red text-[10px] uppercase font-bold tracking-widest"
+                                {tab === 'signup' && (
+                                    <div className="space-y-1.5">
+                                        <label className="text-[10px] font-bold text-muted uppercase tracking-widest flex items-center gap-2"><ShieldCheck size={10} /> Confirm Encryption</label>
+                                        <input
+                                            required
+                                            type="password"
+                                            placeholder="••••••••"
+                                            className="w-full bg-white/5 border border-white/10 px-4 py-3 text-sm focus:border-orange/50 outline-none transition-all placeholder:text-muted/30"
+                                            value={confirmPass}
+                                            onChange={e => setConfirmPass(e.target.value)}
+                                        />
+                                    </div>
+                                )}
+
+                                {err && (
+                                    <motion.div
+                                        initial={{ opacity: 0 }}
+                                        animate={{ opacity: 1 }}
+                                        className="flex items-center gap-3 p-3 bg-red/10 border border-red/20 text-red text-[10px] uppercase font-bold tracking-widest"
+                                    >
+                                        <Info size={14} /> {err}
+                                    </motion.div>
+                                )}
+
+                                <Btn
+                                    full
+                                    size="lg"
+                                    type="submit"
+                                    disabled={loading}
+                                    className="h-14 mt-4"
                                 >
-                                    <Info size={14} /> {err}
-                                </motion.div>
-                            )}
-
-                            <Btn
-                                full
-                                size="lg"
-                                type="submit"
-                                disabled={loading}
-                                className="h-14 mt-4"
-                            >
-                                {loading ? 'Processing...' : tab === 'signin' ? 'Verify Entry' : 'Register Operator'}
-                            </Btn>
-                        </motion.form>
-                    </AnimatePresence>
+                                    {loading ? 'Processing...' : tab === 'signin' ? 'Verify Entry' : 'Register Operator'}
+                                </Btn>
+                            </motion.form>
+                        </AnimatePresence>
+                    ) : (
+                        <div className="relative py-12 flex flex-col items-center">
+                            <div className="w-16 h-16 bg-white/[0.02] border border-orange/20 flex items-center justify-center text-orange mb-4">
+                                <Box size={32} />
+                            </div>
+                            <p className="text-[9px] font-mono text-muted uppercase tracking-widest">Sector Access: Partial // Protocol ACTIVE</p>
+                        </div>
+                    )}
 
                     <div className="relative py-4">
                         <div className="absolute inset-0 flex items-center"><div className="w-full border-t border-white/5"></div></div>

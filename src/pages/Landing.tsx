@@ -62,8 +62,14 @@ export default function Landing() {
                 className="fixed top-0 left-0 right-0 z-50 border-b px-6 py-4 flex items-center justify-between"
             >
                 <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 bg-orange flex items-center justify-center font-display text-xl text-black">R</div>
-                    <span className="font-display text-2xl tracking-[0.2em] text-orange">RAGE OS</span>
+                    <motion.div
+                        animate={{ rotate: 360 }}
+                        transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
+                        className="w-8 h-8 bg-orange flex items-center justify-center font-display text-xl text-black"
+                    >
+                        T
+                    </motion.div>
+                    <span className="font-display text-2xl tracking-[0.2em] text-orange">TECHLIONS</span>
                 </div>
 
                 <div className="hidden md:flex items-center gap-8">
@@ -97,10 +103,15 @@ export default function Landing() {
                             Protocol: Performance Excellence
                         </div>
 
-                        <h1 className="font-display text-[clamp(64px,12vw,160px)] leading-[0.85] uppercase tracking-tight">
+                        <motion.h1
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.8, ease: "easeOut" }}
+                            className="font-display text-[clamp(64px,12vw,160px)] leading-[0.85] uppercase tracking-tight"
+                        >
                             Rise <span className="text-orange">Achieve</span> <br />
                             Grow <span className="text-orange outline-text">Evolve</span>
-                        </h1>
+                        </motion.h1>
                     </motion.div>
 
                     <motion.div
@@ -251,8 +262,8 @@ export default function Landing() {
                 <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
                     <div className="flex flex-col items-center md:items-start gap-4">
                         <div className="flex items-center gap-2">
-                            <div className="w-6 h-6 bg-orange flex items-center justify-center font-display text-sm text-black">R</div>
-                            <span className="font-display text-xl tracking-widest text-orange">RAGE OS</span>
+                            <div className="w-6 h-6 bg-orange flex items-center justify-center font-display text-sm text-black">T</div>
+                            <span className="font-display text-xl tracking-widest text-orange">TECHLIONS</span>
                         </div>
                         <p className="text-[10px] text-muted font-mono uppercase tracking-widest">
                             Built for students who refuse to be average. © 2026

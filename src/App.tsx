@@ -28,8 +28,8 @@ function LoadingScreen() {
                 animate={{ opacity: 1, scale: 1 }}
                 className="text-center"
             >
-                <h1 className="font-display text-7xl text-orange tracking-[0.1em] glow-orange">RAGE OS</h1>
-                <p className="font-mono text-[10px] text-muted tracking-widest mt-4 uppercase">Initializing Terminal... Stage 1/3</p>
+                <h1 className="font-display text-7xl text-orange tracking-[0.1em] glow-orange">TECHLIONS</h1>
+                <p className="font-mono text-[10px] text-muted tracking-widest mt-4 uppercase">Initializing Core... Stage 1/3</p>
                 <div className="w-48 h-0.5 bg-white/5 mt-8 relative overflow-hidden">
                     <motion.div
                         initial={{ left: '-100%' }}
@@ -69,7 +69,11 @@ const AppGuard = () => {
 const AuthGuard = () => {
     const { currentUser, userProfile, authLoading } = useAuth()
     if (authLoading) return <LoadingScreen />
-    if (currentUser && userProfile?.onboardingComplete) return <Navigate to="/app" replace />
+    // Auth Guard: Only redirect to app if fully onboarded.
+    // Otherwise, let them see the Auth page to confirm session or switch account.
+    if (currentUser && userProfile?.onboardingComplete) {
+        return <Navigate to="/app" replace />
+    }
     return <Outlet />
 }
 

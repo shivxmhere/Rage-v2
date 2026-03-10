@@ -11,9 +11,9 @@ export default defineConfig({
             registerType: 'autoUpdate',
             includeAssets: ['favicon.ico', 'apple-touch-icon.png'],
             manifest: {
-                name: 'RAGE OS',
-                short_name: 'RAGE OS',
-                description: 'Rise. Achieve. Grow. Evolve.',
+                name: 'TECHLIONS OS',
+                short_name: 'TECHLIONS',
+                description: 'Rise. Achieve. Grow. Evolve. The Elite Student OS.',
                 theme_color: '#080810',
                 background_color: '#080810',
                 display: 'standalone',
