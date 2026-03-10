@@ -25,7 +25,7 @@ const FEATURES = [
     { icon: Database, title: 'RAGE VAULT', desc: 'Encrypted tactical knowledge base for files and persistent notes.', tag: 'Knowledge' },
     { icon: Target, title: 'RAGE GOALS', desc: 'High-stakes OKR tracking with milestone visualization.', tag: 'Execution' },
     { icon: Calendar, title: 'RAGE TIMETABLE', desc: 'Dynamic combat scheduler with browser-level notification alerts.', tag: 'Operations' },
-    { icon: Cpu, title: 'RAGE AI TUTOR', desc: 'Claude-3.5-Sonnet integration for strategic academic support.', tag: 'AI' },
+    { icon: Cpu, title: 'RAGE AI TUTOR', desc: 'Llama-3.3-70B (Neural Nexus) integration for strategic academic support.', tag: 'AI' },
     { icon: UserCircle, title: 'RAGE PROFILE', desc: 'Academic rank system from Spark to RAGE with seasonal stats.', tag: 'Identity' }
 ]
 
