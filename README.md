@@ -1,16 +1,58 @@
-# React + Vite
+# RAGE OS — The Student Operating System
+### Rise. Achieve. Grow. Evolve.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**RAGE OS** is a world-class, production-grade application designed for students who refuse to be average. It replaces 9+ fragmented apps with a singular, high-intensity tactical interface built for performance, discipline, and academic dominance.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🛠️ Stack — Best in Class
+*   **Frontend**: React 18 + Vite + TypeScript
+*   **Styling**: Tailwind CSS v4 + Framer Motion (Dark Futuristic Brutalism)
+*   **Backend**: Firebase Auth + Firestore + Storage
+*   **AI Intelligence**: Llama-3.3-70B via Groq API (Neural Nexus)
+*   **Analytics**: Recharts
+*   **PWA**: Fully installable as a mobile app
 
-## React Compiler
+## 🛰️ Core Modules
+1.  **RAGE REPORT**: Deep dive into your performance metrics and study patterns.
+2.  **RAGE TRACK**: High-precision study timer and habit synchronization.
+3.  **RAGE FEED**: Social intelligence layer for academic operatives.
+4.  **RAGE CONNECT**: Live study clusters and elite squad accountability.
+5.  **RAGE VAULT**: Encrypted tactical repository for your intellectual assets.
+6.  **RAGE GOALS**: Strategic directive tracking with OKR-grade precision.
+7.  **RAGE TIMETABLE**: Command schedule with integrated notification protocols.
+8.  **NEURAL NEXUS**: Context-aware AI tutoring for first-principles mastery.
+9.  **PERSONNEL DOSSIER**: Academic identity and rank progression system.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🚀 Getting Started
 
-## Expanding the ESLint configuration
+### Prerequisites
+*   Node.js 18+
+*   npm
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Installation
+1.  Clone the repository:
+    ```bash
+    git clone https://github.com/shivxmhere/Rage-v2.git
+    cd Rage-v2
+    ```
+2.  Install dependencies:
+    ```bash
+    npm install
+    ```
+3.  Configure Environment Variables:
+    Create a `.env` file in the root:
+    ```env
+    VITE_GROQ_API_KEY=your_api_key_here
+    ```
+4.  Launch Terminal:
+    ```bash
+    npm run dev
+    ```
+
+## 🛡️ Security
+RAGE OS utilizes Firebase Security Rules to ensure data integrity and personnel privacy. Strategic identity parameters are verified through secure authentication links.
+
+---
+**Rise. Achieve. Grow. Evolve.**
+*Built with absolute precision for the elite 1%.*
