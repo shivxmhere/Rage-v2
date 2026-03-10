@@ -1,58 +1,101 @@
-# RAGE OS — The Student Operating System
-### Rise. Achieve. Grow. Evolve.
+# RAGE OS — Rise. Achieve. Grow. Evolve.
+> Rise. Achieve. Grow. Evolve.
+**[Explore Live App](https://rage-os.vercel.app)**
 
-**RAGE OS** is a world-class, production-grade application designed for students who refuse to be average. It replaces 9+ fragmented apps with a singular, high-intensity tactical interface built for performance, discipline, and academic dominance.
+A world-class, production-grade Student Operating System designed for academic dominance and systematic progress.
 
----
+## 🛠 Tech Stack
 
-## 🛠️ Stack — Best in Class
-*   **Frontend**: React 18 + Vite + TypeScript
-*   **Styling**: Tailwind CSS v4 + Framer Motion (Dark Futuristic Brutalism)
-*   **Backend**: Firebase Auth + Firestore + Storage
-*   **AI Intelligence**: Llama-3.3-70B via Groq API (Neural Nexus)
-*   **Analytics**: Recharts
-*   **PWA**: Fully installable as a mobile app
+| Category | Technology |
+| :--- | :--- |
+| **Core** | React 18, Vite, TypeScript |
+| **Styling** | Tailwind CSS v4, Framer Motion |
+| **Backend** | Firebase Auth, Firestore, Storage |
+| **Intelligence** | Groq (Llama-3.3-70B) / Claude |
+| **Analytics** | Recharts |
+| **Format** | PWA (Progressive Web App) |
 
-## 🛰️ Core Modules
-1.  **RAGE REPORT**: Deep dive into your performance metrics and study patterns.
-2.  **RAGE TRACK**: High-precision study timer and habit synchronization.
-3.  **RAGE FEED**: Social intelligence layer for academic operatives.
-4.  **RAGE CONNECT**: Live study clusters and elite squad accountability.
-5.  **RAGE VAULT**: Encrypted tactical repository for your intellectual assets.
-6.  **RAGE GOALS**: Strategic directive tracking with OKR-grade precision.
-7.  **RAGE TIMETABLE**: Command schedule with integrated notification protocols.
-8.  **NEURAL NEXUS**: Context-aware AI tutoring for first-principles mastery.
-9.  **PERSONNEL DOSSIER**: Academic identity and rank progression system.
+## 📦 Core Modules
 
-## 🚀 Getting Started
+| Module | Functionality |
+| :--- | :--- |
+| **TRACK** | High-precision study timer and habit synchronization. |
+| **FEED** | Tactical social intelligence layer for peer networking. |
+| **VAULT** | Encrypted knowledge base for files and persistent notes. |
+| **GOALS** | Strategic directive tracking with OKR precision. |
+| **TIMETABLE** | Dynamic command schedule with browser alerts. |
+| **AI TUTOR** | Neural Nexus support for first-principles mastery. |
+| **REPORT** | Live analytics and performance radar visualization. |
+| **PROFILE** | Academic rank progression and identity parameters. |
+| **CONNECT** | Live study clusters and squad accountability. |
 
-### Prerequisites
-*   Node.js 18+
-*   npm
+## 📂 Project Structure
 
-### Installation
-1.  Clone the repository:
-    ```bash
-    git clone https://github.com/shivxmhere/Rage-v2.git
-    cd Rage-v2
-    ```
-2.  Install dependencies:
-    ```bash
-    npm install
-    ```
-3.  Configure Environment Variables:
-    Create a `.env` file in the root:
-    ```env
-    VITE_GROQ_API_KEY=your_api_key_here
-    ```
-4.  Launch Terminal:
-    ```bash
-    npm run dev
-    ```
+```text
+src/
+├── assets/
+├── components/
+│   ├── ProtectedRoute.tsx
+│   └── UI.tsx
+├── context/
+│   └── AuthContext.tsx
+├── lib/
+│   └── firebase.ts
+├── pages/
+│   ├── Auth.tsx
+│   ├── Dashboard.tsx
+│   ├── Landing.tsx
+│   ├── Onboarding.tsx
+│   └── dashboard/
+│       ├── AIChat.tsx
+│       ├── Connect.tsx
+│       ├── Feed.tsx
+│       ├── Goals.tsx
+│       ├── Profile.tsx
+│       ├── Report.tsx
+│       ├── Timetable.tsx
+│       ├── Track.tsx
+│       └── Vault.tsx
+├── App.tsx
+├── index.css
+├── main.tsx
+└── vite-env.d.ts
+```
 
-## 🛡️ Security
-RAGE OS utilizes Firebase Security Rules to ensure data integrity and personnel privacy. Strategic identity parameters are verified through secure authentication links.
+## 🚀 Quick Setup
 
----
-**Rise. Achieve. Grow. Evolve.**
-*Built with absolute precision for the elite 1%.*
+```bash
+# 1. Clone repository
+git clone https://github.com/shivxmhere/Rage-v2.git
+
+# 2. Install dependencies
+npm install
+
+# 3. Configure environment
+copy .env.example .env
+
+# 4. Launch development
+npm run dev
+```
+
+## 🔑 Environment Variables
+
+```text
+VITE_FIREBASE_API_KEY
+VITE_FIREBASE_AUTH_DOMAIN
+VITE_FIREBASE_PROJECT_ID
+VITE_FIREBASE_STORAGE_BUCKET
+VITE_FIREBASE_MESSAGING_SENDER_ID
+VITE_FIREBASE_APP_ID
+VITE_GROQ_API_KEY
+```
+
+## 🛡 Infrastructure
+
+- **Auth**: Firebase Authentication with secure Google and Email provider integration.
+- **Database**: Firestore NoSQL database providing real-time cross-device synchronization.
+- **Deployment**: High-performance Vercel pipeline with automated CI/CD protocols.
+
+## 📄 License
+
+MIT
